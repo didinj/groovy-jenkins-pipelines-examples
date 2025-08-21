@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    environment {
+        DEPLOY_ENV = 'staging'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building application in ${DEPLOY_ENV} environment"
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    def testSuites = ['unit', 'integration']
+                    testSuites.each { suite ->
+                        echo "Running ${suite} tests..."
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression { return env.DEPLOY_ENV == 'staging' }
+            }
+            steps {
+                echo "Deploying to ${env.DEPLOY_ENV}"
+            }
+        }
+    }
+}

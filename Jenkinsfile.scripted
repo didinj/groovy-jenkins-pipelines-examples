@@ -1,0 +1,27 @@
+node {
+    def services = ['auth', 'payment', 'orders']
+
+    stage('Build Services') {
+        services.each { svc ->
+            echo "Building service: ${svc}"
+        }
+    }
+
+    stage('Test') {
+        for (int i = 1; i <= 3; i++) {
+            echo "Running test batch #${i}"
+        }
+    }
+
+    stage('Deploy') {
+        try {
+            echo "Deploying app..."
+            sh 'exit 1' // simulate failure
+        } catch (err) {
+            echo "Error caught: ${err}"
+            currentBuild.result = 'UNSTABLE'
+        } finally {
+            echo "Cleanup completed."
+        }
+    }
+}

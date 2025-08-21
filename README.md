@@ -1,6 +1,6 @@
 # Jenkins Groovy Pipeline Tutorial
 
-Read the full tutorial [here]().
+Read the full tutorial [here](https://www.djamware.com/post/68a685c5379994426da054e7/using-groovy-for-jenkins-pipelines-a-practical-guide).
 
 This project contains example Jenkins pipelines using Groovy:
 
